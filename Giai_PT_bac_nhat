@@ -1,0 +1,60 @@
+#giai pt ax + b = 0
+.data
+str1: .asciiz "\nNhap a: "
+str2: .asciiz "\nNhap b: "
+str3: .asciiz "\nx= "
+str4: .asciiz "\nKhong co gia tri x."
+str5: .asciiz "\ndu: "
+
+.text
+main:
+
+#nhap a
+la $a0, str1
+addi $v0, $zero, 4
+syscall
+addi $v0, $zero, 5
+syscall
+move $t0, $v0
+
+#nhap b
+la $a0, str2
+addi $v0, $zero, 4
+syscall
+addi $v0, $zero, 5
+syscall
+move $t1, $v0
+
+#xet a = 0
+bne $t0, $zero, Tinh
+la $a0, str4
+addi $v0, $zero, 4
+syscall
+j exit
+# tinh x
+
+Tinh:
+la $a0, str3
+addi $v0, $zero, 4
+syscall
+
+sub $t7,$0,$t1
+div $t7,$t0
+#thuong cua -b chia a nam trong $lo
+#so du nam trong $hi
+
+addi $v0,$0,1
+mflo $a0
+syscall
+
+la $a0, str5
+addi $v0, $zero, 4
+syscall
+
+addi $v0,$0,1
+mfhi $a0
+syscall
+
+exit:
+addi $v0, $zero, 10
+syscall

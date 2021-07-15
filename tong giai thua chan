@@ -1,0 +1,25 @@
+.text
+	li $v0,5
+	syscall
+	move $t0,$v0    #n=...
+	addi $s2,$0,1 #sum=1
+	addi $t1,$0,0 #i=1
+	addi $t2,$0,1  
+	addi $t3,$0,1
+dk:    addi $t1,$t1,1
+	beq $t1,$t0,exit
+	mul $s1,$t1,2
+	j lap	
+lap:      
+	mul $t2,$t2,$t3
+	 addi $t3,$t3,1
+	bgt $t3,$s1,sum
+	j lap
+sum: 	add $s2,$s2,$t2
+	addi $t2,$0,1  
+	addi $t3,$0,1
+	j dk
+exit:
+	li $v0,1
+	move $a0,$s2
+	syscall

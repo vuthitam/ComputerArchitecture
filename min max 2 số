@@ -1,0 +1,60 @@
+.data
+	str1: .asciiz "nhap so a:"
+	str2: .asciiz "nhap so b:"
+	min: .asciiz "\nmin ="
+	max: .asciiz "\nmax="
+.text
+	#nhap so a
+	li $v0,4
+	la $a0,str1
+	syscall
+
+	li $v0, 5
+	syscall
+	move $t0,$v0
+	# nhap so b
+	li $v0,4
+	la $a0,str2
+	syscall
+
+	li $v0,5
+	syscall
+	move $t1,$v0 
+	
+	#?o?n r? nhánh if then
+
+	bgt $t0,$t1,ketqua
+	li $v0,4
+	la $a0,max
+	syscall
+	li $v0,1
+	move $a0, $t1
+	syscall
+
+	li $v0,4
+	la $a0,min
+	syscall
+	li $v0,1
+	move $a0, $t0
+	syscall
+	j Exit
+ketqua: 
+	li $v0,4
+	la $a0,min
+	syscall
+	li $v0,1
+	move $a0,$t1
+	syscall
+
+	li $v0,4
+	la $a0,max
+	syscall
+	li $v0,1
+	move $a0, $t0
+	syscall
+	#j Exit
+	
+Exit:	li $v0,10
+	syscall	
+
+	

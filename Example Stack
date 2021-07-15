@@ -1,0 +1,13 @@
+.data 
+    
+.text
+	li $s1, 100
+	li $s2,50
+	add $sp, $sp,-8
+	sw $s1, 4($sp)
+	sw $s2, ($sp)
+	add $s1,$0,0
+	add $s2,$0,0
+	lw $s1, 4($sp)
+	lw $s2, ($sp)
+	add $sp, $sp,8

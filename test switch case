@@ -1,0 +1,41 @@
+.data
+str1: .asciiz "nhap so luong: "	
+str2: .asciiz "Phi tuong ung la: "
+.text
+	li $v0, 4
+	la $a0, str1
+	syscall
+	li $v0, 5
+	syscall
+	move $s0, $v0
+#	 $s0 = amount, $s1 = fee
+	bnez $s0,case20
+	case20:
+	addi $t0, $0, 20 # $t0 = 20
+	bne $s0, $t0, case30 # amount != 20, skip to case30
+	addi $s1, $0, 2 # fee = 2
+	j donecase # break out of case
+	case30:
+	addi $t0, $0, 30 # $t0 = 30
+	bne $s0, $t0, case40 # amount != 30, skip to case40
+	addi $s1, $0, 3 # fee = 3
+	j donecase # break out of case
+	case40:
+	addi $t0, $0, 40 # $t0 = 40
+	bne $s0, $t0, default # amount != 40, go to default
+	addi $s1, $0, 4 # fee = 4
+	j donecase # out of case
+	default:
+	addi $s1 ,$0, 0 # fee = 0
+	
+	
+donecase:
+	li $v0, 4
+	la $a0, str2
+	syscall
+	li $v0,1
+	move $a0,$s1
+	syscall
+	
+	li $v0, 10
+	syscall

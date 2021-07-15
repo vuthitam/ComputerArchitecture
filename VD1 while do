@@ -1,0 +1,18 @@
+.data
+.text
+	#Mã C:
+	#while (A[i] == k) i += 1;
+	
+	# Mã h?p ng? MIPS:
+	# $s1=i, $s2=k, ?/c c? s? c?a m?ng A ? $s3
+	Loop:
+	sll $t0, $s1, 2 # $t0 = 4*i
+	add $t0, $t0, $s3 # $t0 = ??a ch? A[i]
+	lw $t1, 0($t0) # $t1 = A[i]
+	bne $t1, $s2, Exit # n?u A[i]<>k thì Exit
+	addi $s1, $s1, 1 # n?u A[i]=k thì i=i+1
+	j Loop # quay l?i Loop
+	Exit: 
+	li $v0, 10
+	syscall
+	

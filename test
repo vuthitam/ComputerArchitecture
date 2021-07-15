@@ -1,0 +1,4 @@
+.text
+	addi $t1,$t1,5
+	subi $t1,$t1,-1
+	

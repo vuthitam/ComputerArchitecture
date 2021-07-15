@@ -1,0 +1,27 @@
+.data
+	str1: .asciiz “ Nh?p H? tên:”
+	str2: .asciiz “Nh?p tu?i:”
+	hoten: .space 24
+	tuoi: .word 0
+.text
+.globl  main
+	main:
+	li $v0, 4
+	la $a0, prompt1
+	syscall # In prompt1
+	# Nh?p chu?i ghi vào d/c $a0, chi?u dài $a1
+	li $v0, 8
+	la $a0, hoten
+	li $a1, 24
+	syscall
+	# Nh?p tu?i
+	li $v0, 4
+	la $a0, prompt2
+	syscall # In prompt2
+	li $v0, 5
+	syscall
+	la $a0, tuoi
+	sw $v0, $a0
+	# K?t thúc
+	li $v0, 10
+	syscall 

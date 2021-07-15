@@ -1,0 +1,50 @@
+.data
+	text_1: .asciiz "n = "
+	text_2: .asciiz "Xuat ra: "
+.text
+main:
+	la $a0, text_1 #load text_1 string
+	jal print_text
+	
+	jal read_int
+	move $s0, $v0 # n: $s0
+	
+	la $a0, text_2 #load text_2 string
+	jal print_text
+	
+	li $s1, 0 # $s1=0
+	li $v0, 1
+	begin_loop:
+	beq $s0, $zero, end_loop # if (n==0) jump end_loop
+	move $a0, $s1
+	jal print_int
+	jal print_space
+	addi $s1, $s1, 2 # $s1 += 2
+	addi $s0, $s0, -1 # n--
+	j begin_loop
+	end_loop:
+	
+	j end_program
+	
+	print_text:
+	li $v0, 4 #print text
+	syscall
+	jr $ra
+	
+	read_int:
+	li $v0, 5 #read interger
+	syscall
+	jr $ra
+	
+	print_int:
+	li $v0, 1 #print interger
+	syscall
+	jr $ra
+
+	print_space:
+	addi $a0,$zero, 32 # $a0 = " "
+	li $v0, 11 #print character
+	syscall	
+	jr $ra
+	
+	end_program:

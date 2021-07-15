@@ -1,0 +1,21 @@
+.data
+	Str1: .asciiz "nhap n"
+.text
+	li $v0,5
+	syscall
+	move $s0,$v0	#n= ..
+	
+	addi $t1,$0,0 #sum=0
+	addi $t2,$0,1	#thua so trc
+	addi $t3,$0,1	#thua so sau
+do:     bgt $t3,$s0,exit 
+	mul $t2,$t2,$t3
+	add $t1,$t1,$t2
+	addi $t3,$t3,1
+	j do
+exit:   li $v0,1
+	move $a0,$t1
+	syscall
+
+
+	

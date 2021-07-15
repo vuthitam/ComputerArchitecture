@@ -1,0 +1,17 @@
+.data
+
+.text
+	#Mã C:
+	#if (i==j)
+	#f = g+h;
+	#else f = f-i;
+	# Mã MIPS:
+	# $s0 = f, $s1 = g, $s2 = h
+	# $s3 = i, $s4 = j
+	bne $s3, $s4, L1
+	add $s0, $s1, $s2
+	j Exit
+	L1: sub $s0, $s0, $s3
+	Exit:
+	li $v0, 10
+	syscall
